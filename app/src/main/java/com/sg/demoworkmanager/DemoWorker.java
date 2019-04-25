@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.work.Data;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
@@ -15,10 +16,15 @@ public class DemoWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        for(int i=0;i<100000;i++)
+        Data data=getInputData();
+        int count=data.getInt("int",10750);
+        for(int i=0;i<count
+
+                ;i++)
         {
             Log.d("Worker TAG",""+i);
         }
-        return Result.success();
+        Data data1=new Data.Builder().putString("string","Hello! Task Completed").build();
+        return Result.success(data1);
     }
 }
